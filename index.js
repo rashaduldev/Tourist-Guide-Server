@@ -25,6 +25,7 @@ async function run() {
     // Connect the client to the server	(optional starting in v4.7)
     await client.connect();
 
+    const usercollection = client.db("Tour").collection("users");
     const packagecollection = client.db("Tour").collection("packages");
     const wishlistcollection = client.db("Tour").collection("wishlists");
 
@@ -37,6 +38,13 @@ async function run() {
     app.post('/wishlists',async(req,res) => {
       const cartItem=req.body;
       const result=await wishlistcollection.insertOne(cartItem);
+      res.send(result)
+  })
+    // post wishlists data read
+    app.get('/wishlists',async(req,res) => {
+      const email=req.query.email;
+      const query={email: email}
+      const result=await wishlistcollection.find(query).toArray();
       res.send(result)
   })
 
