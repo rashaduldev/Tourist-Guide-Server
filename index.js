@@ -8,7 +8,7 @@ app.use(cors());
 app.use(express.json());
 
 
-const { MongoClient, ServerApiVersion } = require('mongodb');
+const { MongoClient, ServerApiVersion, ObjectId } = require('mongodb');
 const uri = `mongodb+srv://mdrashadul898:wkYD1prFIEg6WmZN@cluster0.jaw4lpx.mongodb.net/?retryWrites=true&w=majority`;
 
 // Create a MongoClient with a MongoClientOptions object to set the Stable API version
@@ -28,11 +28,17 @@ async function run() {
     const usercollection = client.db("Tour").collection("users");
     const packagecollection = client.db("Tour").collection("packages");
     const wishlistcollection = client.db("Tour").collection("wishlists");
+    const guidecollection = client.db("Tour").collection("guides");
 
     app.get('/packages',async(req,res) => {
       const result=await packagecollection.find().toArray();
       res.send(result)
   })
+  // guidecollection
+  app.get('/guides',async(req,res) => {
+    const result=await guidecollection.find().toArray();
+    res.send(result)
+})
 
   // wishlists collection
     app.post('/wishlists',async(req,res) => {
@@ -47,6 +53,13 @@ async function run() {
       const result=await wishlistcollection.find(query).toArray();
       res.send(result)
   })
+   // delete wishlists item
+   app.delete('/carts/:id',async(req,res) => {
+    const id=req.params.id;
+    const query={_id: new ObjectId(id)}
+    const result=await wishlistcollection.deleteOne(query);
+    res.send(result)
+})
 
     // Send a ping to confirm a successful connection
     await client.db("admin").command({ ping: 1 });
