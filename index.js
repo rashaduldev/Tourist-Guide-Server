@@ -29,16 +29,49 @@ async function run() {
     const packagecollection = client.db("Tour").collection("packages");
     const wishlistcollection = client.db("Tour").collection("wishlists");
     const guidecollection = client.db("Tour").collection("guides");
+    const storiecollection = client.db("Tour").collection("stories");
+    const blogcollection = client.db("Tour").collection("blogs");
+    const bookingcollection = client.db("Tour").collection("bookings");
 
     app.get('/packages',async(req,res) => {
       const result=await packagecollection.find().toArray();
       res.send(result)
   })
+  // storiecollection
+  app.get('/stories',async(req,res) => {
+    const result=await storiecollection.find().toArray();
+    res.send(result)
+})
+  // blogcollection
+  app.get('/blogs',async(req,res) => {
+    const result=await blogcollection.find().toArray();
+    res.send(result)
+})
   // guidecollection
   app.get('/guides',async(req,res) => {
     const result=await guidecollection.find().toArray();
     res.send(result)
 })
+// booking
+    app.get('/bookings',async(req,res) => {
+      const email=req.query.email;
+      const query={email: email}
+      const result=await bookingcollection.find(query).toArray();
+      res.send(result)
+  })
+     // delete booking item
+   app.delete('/bookings/:id',async(req,res) => {
+    const id=req.params.id;
+    const query={_id: new ObjectId(id)}
+    const result=await bookingcollection.deleteOne(query);
+    res.send(result)
+})
+  // wishlists collection
+    app.post('/bookings',async(req,res) => {
+      const cartItem=req.body;
+      const result=await bookingcollection.insertOne(cartItem);
+      res.send(result)
+  })
 
   // wishlists collection
     app.post('/wishlists',async(req,res) => {
