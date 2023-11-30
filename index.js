@@ -70,11 +70,11 @@ async function run() {
       })
       // next();
     }
-    app.get('/users/admin/:email',verifyToken,async(req,res)=>{
+    app.get('/users/admin/:email',async(req,res)=>{
       const email=req.params.email;
-      if (email !== req.decoded.email) {
-        return res.status(403).send({message: 'Unauthorized access'});
-      }
+      // if (email !== req.decoded.email) {
+      //   return res.status(403).send({message: 'Unauthorized access'});
+      // }
       const query={email:email}
 
       const user=await usercollection.findOne(query);
@@ -97,7 +97,7 @@ async function run() {
           res.send(result)
       })
       // get user to Display
-      app.get('/users',verifyToken,verifyadmin, async(req,res)=>{
+      app.get('/users',verifyToken, async(req,res)=>{
         console.log(req.headers);
         const result=await usercollection.find().toArray();
         res.send(result);
