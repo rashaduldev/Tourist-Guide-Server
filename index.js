@@ -2,18 +2,20 @@ const express = require('express')
 const cors = require('cors')
 var jwt = require('jsonwebtoken');
 const app = express()
-const port=process.env.PORT || 8000
+const port=process.env.PORT || 3000
 
 // Malware configuration
-// app.use(cors({
-//   origin:[
-    // 'https://travel-and-adventure.web.app',
-//     ' http://localhost:5173', 
-//     ' https://localhost:5173', 
-//   ], credentials:true
-// }));
-app.use(express.json());
-app.use(cors());
+app.use(cors({
+  origin: [
+    'https://travel-and-adventure.web.app',
+    'http://travel-and-adventure.web.app',
+    'http://localhost:5173',
+    'https://localhost:5173',
+    'http://localhost:5176',
+  ],
+  credentials: true // Enable credentials (if required)
+}));
+// app.use(cors());
 
 
 const { MongoClient, ServerApiVersion, ObjectId } = require('mongodb');
@@ -175,8 +177,8 @@ async function run() {
 })
 
     // Send a ping to confirm a successful connection
-    await client.db("admin").command({ ping: 1 });
-    console.log("Pinged your deployment. You successfully connected to MongoDB!");
+    // await client.db("admin").command({ ping: 1 });
+    // console.log("Pinged your deployment. You successfully connected to MongoDB!");
   } finally {
     // Ensures that the client will close when you finish/error
     // await client.close();
