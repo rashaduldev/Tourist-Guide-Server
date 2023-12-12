@@ -5,8 +5,15 @@ const app = express()
 const port=process.env.PORT || 8000
 
 // Malware configuration
-app.use(cors());
+// app.use(cors({
+//   origin:[
+    // 'https://travel-and-adventure.web.app',
+//     ' http://localhost:5173', 
+//     ' https://localhost:5173', 
+//   ], credentials:true
+// }));
 app.use(express.json());
+app.use(cors());
 
 
 const { MongoClient, ServerApiVersion, ObjectId } = require('mongodb');
@@ -24,7 +31,7 @@ const client = new MongoClient(uri, {
 async function run() {
   try {
     // Connect the client to the server	(optional starting in v4.7)
-    await client.connect();
+    // await client.connect();
 
     const usercollection = client.db("Tour").collection("users");
     const packagecollection = client.db("Tour").collection("packages");
