@@ -2,7 +2,7 @@ const express = require('express')
 const cors = require('cors')
 var jwt = require('jsonwebtoken');
 const app = express()
-const port=process.env.PORT || 3000
+const port=process.env.PORT || 8000
 
 // Malware configuration
 app.use(cors({
@@ -12,10 +12,11 @@ app.use(cors({
     'http://localhost:5173',
     'https://localhost:5173',
     'http://localhost:5176',
+    'http://localhost:8000',
+    'https://localhost:8000',
   ],
-  credentials: true // Enable credentials (if required)
+  credentials: true 
 }));
-// app.use(cors());
 
 
 const { MongoClient, ServerApiVersion, ObjectId } = require('mongodb');
