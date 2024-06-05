@@ -8,12 +8,13 @@ const port=process.env.PORT || 8000
 app.use(cors({
   origin: [
     'https://travel-and-adventure.web.app',
-    'http://travel-and-adventure.web.app',
-    'http://localhost:5173',
-    'https://localhost:5173',
-    'http://localhost:5176',
-    'http://localhost:8000',
-    'https://localhost:8000',
+    'http://travel-and-adventure.web.app', 
+    'https://tourist-guide-sigma.vercel.app',
+    'http://tourist-guide-sigma.vercel.app',
+    'http://localhost:5174',
+    'https://localhost:5174',
+    'https://tourist-guide-server-blush.vercel.app',
+    'http://tourist-guide-server-blush.vercel.app'
   ],
   credentials: true 
 }));
