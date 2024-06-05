@@ -7,14 +7,12 @@ const port=process.env.PORT || 8000
 // Malware configuration
 app.use(cors({
   origin: [
-    'https://travel-and-adventure.web.app',
-    'http://travel-and-adventure.web.app', 
-    'https://tourist-guide-sigma.vercel.app',
-    'http://tourist-guide-sigma.vercel.app',
     'http://localhost:5174',
     'https://localhost:5174',
-    'https://tourist-guide-server-blush.vercel.app',
-    'http://tourist-guide-server-blush.vercel.app'
+    'https://tour-guide-theta.vercel.app',
+    'https://tour-guide-theta.vercel.app',
+    'https://tourist-guide-sigma.vercel.app',
+    'http://tourist-guide-sigma.vercel.app',
   ],
   credentials: true 
 }));
