@@ -9,6 +9,8 @@ app.use(cors({
   origin: [
     'http://localhost:5174',
     'https://localhost:5174',
+    'http://localhost:5173',
+    'https://localhost:5173',
     'https://tour-guide-theta.vercel.app',
     'https://tour-guide-theta.vercel.app',
     'https://tourist-guide-sigma.vercel.app',
