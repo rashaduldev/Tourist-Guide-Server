@@ -3,7 +3,7 @@ const cors = require('cors')
 var jwt = require('jsonwebtoken');
 const app = express()
 const port=process.env.PORT || 8000
-
+const bodyParser = require('body-parser');
 // Malware configuration
 app.use(cors({
   origin: [
@@ -18,6 +18,8 @@ app.use(cors({
   ],
   credentials: true 
 }));
+
+app.use(bodyParser.json());
 
 
 const { MongoClient, ServerApiVersion, ObjectId } = require('mongodb');
@@ -108,8 +110,11 @@ async function run() {
           res.send(result)
       })
       // get user to Display
-      app.get('/users',verifyToken, async(req,res)=>{
-        console.log(req.headers);
+      // app.get('/users',verifyToken, async(req,res)=>{
+      //   const result=await usercollection.find().toArray();
+      //   res.send(result);
+      // })
+      app.get('/users', async(req,res)=>{
         const result=await usercollection.find().toArray();
         res.send(result);
       })
